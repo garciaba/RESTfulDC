@@ -217,7 +217,7 @@ select {
     width: 80%;
 }
 
-div.content table, td, th {
+/*div.content table, td, th {
     border: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
@@ -228,7 +228,7 @@ div.content table, td, th {
 
 div.header table, td, th {
     border: 1px solid black;
-}
+}*/
 
 th {
     font-size: 1.5em;

@@ -13,12 +13,16 @@
   <head>
     <title>DC RUM RESTful Helper</title>
 
-    <link rel="stylesheet" type="text/css" href="RESTfulDC.css">
+   <link rel="stylesheet" type="text/css" href="RESTfulDC.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	
     <script src="RESTfulDC.js"></script>
+	<script src="main.js"></script>
   </head>
 
   <body>
-    <div class="title">
+  
+  <!--  <div class="title">
       <h1>DMI REST Services</h1>
       <div id="query">
         <p id="currQuery"></p>
@@ -27,7 +31,139 @@
         <p>Server name: <textarea id="serverName" style="width: 12em;" oninput="setServerName(this.value);"></textarea></p>
       </div>
     </div>
-    <div class="body">
+	-->
+	
+	<div class="nav has-no-secondary" id="query">
+	<p id="currQuery"></p>
+  <a class="nav__brand" href="/">
+    <img class="nav__logo" src="https://help.dynatrace.com/assets/dynatrace-logo.svg" alt="dynatrace logo"/>
+  </a>
+  <div class="nav__buttongroup">
+    <button data-target="#nav-bar-example1" id="menu-toggle" class="nav__btn nav__btn--menutoggle">Menu</button>
+  </div>
+    <div id="serverNameDiv">
+        <p>Server name: <textarea class="textarea" id="serverName" style="width: 12em;" oninput="setServerName(this.value);"></textarea></p>
+      </div>
+   
+  </nav>
+</div>
+
+	
+	
+	
+
+	
+		<div class="layout is-flex has-islands">
+  <div class="column">
+    <div class="island">
+	  <div>	      <header><h2>Parameters
+	  <button role="button" id="sampleDataButton" type="button" class="btn btn--primary " onClick="testSelectedValues()">Get data</button></header></h2>
+	  </div>
+
+
+<ul class="list">
+  <li>Data Sources</li>
+    <select id="datasource" onchange="updateQueriedParameters('datasource');"></select>
+  <li>Dataviews</li>
+            <select id="dataview" onchange="updateQueriedParameters('dataview');"></select>
+  <li>Resolution</li>
+              <select id="resolution" onchange="updateQueriedParameters('resolution');"></select>
+  <li>Dimension
+  <button id="addDimButton" onclick="addDimensionQuery();" class="addButton">+</button>
+  <button id="remDimButton" onclick="removeDimensionQuery();" class="removeButton">-</button>
+  </li>
+              <div id="dimensionSelectors"></div>
+ <li>Metrics
+ <button id="addMetricButton" onclick="addMetricQuery();" class="addButton">+</button>
+              <button id="remMetricButton" onclick="removeMetricQuery();" class="removeButton">-</button></li>
+      
+            <div id="metricSelectors"></div>
+ <li>Time Period</li>
+            <select id="timePeriod"></select>
+
+</ul>
+
+    </div>
+	
+  </div>
+
+  <div class="column">
+    <div class="island">
+      <h2>Filters and Options</h2>
+	          <div id="restQueryParametersContent" class="content">
+
+          <div id="dimFiltersDiv" class="lineItem">
+            <h3>Dimension Filters
+            <button id="addDimButton" onclick="addDimensionFilterLine();" class="addButton">+</button>
+            <button id="remDimButton" onclick="removeDimensionFilterLine();" class="removeButton">-</button>
+            </h3>
+          </div>
+
+          <div id="metricFiltersDiv" class="lineItem">
+            <h3>Metric Filters
+            <button id="addDimButton" onclick="addMetricFilterLine();" class="addButton">+</button>
+            <button id="remDimButton" onclick="removeMetricFilterLine();" class="removeButton">-</button>
+            </h3>
+          </div>
+
+          <div id="sortDiv" class="lineItem">
+            <h3>Sort</h3>
+            <select id="sortParam" class="rightRow" style="width: 60%;">
+              <option value="">Select a parameter to sort by</option>
+            </select><select id="sortDir" class="leftRow" style="width: 30%;">
+              <option value="">Select a sort type</option>
+              <option value="ASC">Ascending</option>
+              <option value="DESC">Descending</option>
+            </select>
+          </div>
+
+          <div class="lineItem" style="display: none;">
+            <h3>Top Filter</h3>
+            <textarea id="topFilter"></textarea>
+          </div>
+
+          <div class="lineItem">
+            <h3>Number of Periods</h3>
+            <textarea id="numberOfPeriods">1</textarea>
+          </div>
+        </div>
+    </div>
+   	 <div class="island">
+	 <div id="userOutputDiv" class="smallColumn">
+          <div id="userOutputHeader" class="header">
+            <h2>Console</h2>
+            <button id='copyURLButton' onclick="copyURL();">Copy URL</button>
+          </div>
+          <div id="userOutput"></div>
+        </div>
+	</div>
+  </div>
+
+  <div class="column">
+    <div class="island">
+      <h2>Sample Data</h2>
+	          <div class="header">
+          <h2>Sample Data</h2>
+          <button onclick="enlargeSampleData();">Enlarge</button>
+        </div>
+
+        <div id="sampleDataOutput" class="content"></div>
+
+    </div>
+	  <div class="island">
+      <h2>JSON Script</h2>
+     <h2>JSON Script</h2>
+            <button id='copyJSONButton' onclick="clipboard('JSONOutput',0);">Copy JSON</button>
+    </div>
+	
+	
+
+  </div>
+</div>
+
+	
+	  <div class="body">
+	
       <div id="getParameters" class="column">
         <div class="header">
           <div id="getParametersTitle">
@@ -75,6 +211,13 @@
         </div>
       </div>
 
+	  
+	
+	  
+	  
+	  
+	  
+	  
       <div id="restQueryParameters" class="column">
         <div class="header">
           <h2>Filters and Options</h2>
